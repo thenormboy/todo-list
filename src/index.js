@@ -1,4 +1,4 @@
-import {createHeader} from './setup.js'
+import './style.css'
 
 function clearPage() {
     const element = document.querySelector('#content')
@@ -7,9 +7,7 @@ function clearPage() {
 }
 
 function loadPage() {
-    const element = document.querySelector('#content')
 
-    element.appendChild(createHeader())
 }
 
 loadPage();
