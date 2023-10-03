@@ -9,6 +9,18 @@ function loadMainButtons() {
         buttons[i].addEventListener('click', () => {
             displayHeading(buttons[i].textContent)
             displayProjects()
+            loadProjectButtons()
+        })
+    }
+}
+
+function loadProjectButtons() {
+
+    const buttons = document.querySelectorAll('#project-button');
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            displayHeading(buttons[i].textContent)
         })
     }
 }

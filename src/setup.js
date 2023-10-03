@@ -2,6 +2,7 @@ import {project} from './todo.js'
 
 let projects = [];
 projects.push(project('Work'));
+projects.push(project('Gym'));
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
@@ -16,7 +17,7 @@ function displayProjects() {
 
     function displayProject(value) {
         const projectButton = document.createElement('button')
-        projectButton.classList.add('project-button')
+        projectButton.setAttribute('id', 'project-button')
         projectButton.textContent = value.getName()
         element.appendChild(projectButton)
     }
