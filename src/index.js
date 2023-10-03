@@ -1,11 +1,12 @@
 import './style.css'
-import {displayHeading} from './setup'
+import {displayHeading, displayProjects} from './setup'
 
 function loadMainButtons() {
 
     const inbox = document.querySelector('#inbox')
     inbox.addEventListener('click', () => {
         displayHeading(inbox.textContent)
+        displayProjects()
     })
 
     const today = document.querySelector('#today')
