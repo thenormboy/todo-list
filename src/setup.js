@@ -21,6 +21,24 @@ function displayProjects() {
         projectButton.textContent = value.getName()
         element.appendChild(projectButton)
     }
+
+    displayProjectModal()
+}
+
+function displayProjectModal() {
+    const addProject = document.getElementById('add-project')
+    const projectModal = document.getElementById('project-modal')
+
+    const cancelBtn = document.getElementById('cancelProjectBtn')
+
+    addProject.addEventListener('click', () => {
+        projectModal.showModal()
+    })
+
+    cancelBtn.addEventListener('click', () => {
+        projectModal.close()
+    })
+
 }
 
 export {
