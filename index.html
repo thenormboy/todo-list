@@ -7,6 +7,20 @@
 </head>
 <body>
     <script src="main.js" defer></script>
+
+    <dialog id="project-modal">
+        <form>
+            <p>
+                <label>Name: </label>
+                <input type="text">
+            </p>
+            <div>
+                <button id="cancelProjectBtn" formmethod="dialog">Cancel</button>
+                <button id="confirmProjectBtn" value="default">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+
     <div id="content">
         <div class="header">
             <div>
