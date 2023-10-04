@@ -1,10 +1,11 @@
 import './style.css'
-import {displayHeading, displayProjects} from './setup'
+import {displayHeading, displayProjects, displayProjectModal} from './setup'
 
 function loadMainButtons() {
 
     displayProjects()
     loadProjectButtons()
+    displayProjectModal()
 
     const buttons = document.querySelectorAll('#sidebar-button');
 
@@ -13,6 +14,7 @@ function loadMainButtons() {
             displayHeading(buttons[i].textContent)
             displayProjects()
             loadProjectButtons()
+            displayProjectModal()
         })
     }
 }

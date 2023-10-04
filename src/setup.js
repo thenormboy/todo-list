@@ -10,6 +10,7 @@ function displayHeading(title) {
 }
 
 function displayProjects() {
+
     const element = document.querySelector('.project-container')
     element.textContent = ''
 
@@ -21,27 +22,38 @@ function displayProjects() {
         projectButton.textContent = value.getName()
         element.appendChild(projectButton)
     }
-
-    displayProjectModal()
 }
 
 function displayProjectModal() {
     const addProject = document.getElementById('add-project')
     const projectModal = document.getElementById('project-modal')
 
+    const projectName = document.getElementById('projectName')
+
     const cancelBtn = document.getElementById('cancelProjectBtn')
+    const confirmBtn = document.getElementById('confirmProjectBtn')
 
     addProject.addEventListener('click', () => {
         projectModal.showModal()
     })
 
-    cancelBtn.addEventListener('click', () => {
+    confirmBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        projects.push(project(projectName.value))
+        projectName.value = ''
         projectModal.close()
+        displayProjects()
     })
 
+    cancelBtn.addEventListener('click', (event) => {
+        event.preventDefault()
+        projectName.value = ''
+        projectModal.close()
+    })
 }
 
 export {
     displayHeading,
-    displayProjects
+    displayProjects,
+    displayProjectModal
 }
