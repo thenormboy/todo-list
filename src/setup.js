@@ -1,5 +1,6 @@
 import {project} from './todo.js'
 import close from './icons/close.svg'
+import edit from './icons/edit.svg'
 
 let projects = [];
 let projectIndex = 0;
@@ -25,15 +26,25 @@ function displayProjects() {
         projectButton.setAttribute('id', 'project-button')
         projectButton.textContent = value.getName()
 
+        const iconContainer = document.createElement('div')
+        iconContainer.classList.add('icon-container')
+
         const closeBtn = document.createElement('button')
+        const editBtn = document.createElement('button')
 
         const closeImg = document.createElement('img')
         closeImg.setAttribute('src', close)
-        closeImg.classList.add('project-icon')
+        closeImg.classList.add('project-icon-close')
+
+        const editImg = document.createElement('img')
+        editImg.setAttribute('src', edit)
+        editImg.classList.add('project-icon-edit')
+
+        editBtn.appendChild(editImg)
         closeBtn.appendChild(closeImg)
-
-        projectButton.appendChild(closeBtn)
-
+        iconContainer.appendChild(editBtn)
+        iconContainer.appendChild(closeBtn)
+        projectButton.appendChild(iconContainer)
         element.appendChild(projectButton)
     }
 
