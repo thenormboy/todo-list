@@ -1,12 +1,13 @@
-const project = (name, ID) => {
+const project = (name, ID, todos) => {
     const getName = () => name;
     const getID = () => ID
+    const getTodos = () => todos
 
     const updateName = newName => {
         name = newName;
     }
 
-    return { getName, getID, updateName }
+    return { getName, getID, getTodos, updateName }
 }
 
 const todo = (name, description, duedate, priority) => {

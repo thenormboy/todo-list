@@ -109,6 +109,21 @@ body {
     border-left: 2px solid rgb(242, 151, 39);
     border-bottom: 2px solid rgb(242, 76, 61);
     border-right: 2px solid rgb(242, 76, 61);
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#project-button button {
+    background: rgb(255, 255, 255, 0);
+    border: none;
+    cursor: pointer;
+
+}
+
+.project-icon {
+    height: 12px;
+    width: 12px;
 }
 
 #add-project {

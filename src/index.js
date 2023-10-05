@@ -1,10 +1,9 @@
 import './style.css'
 import {displayHeading, displayProjects, displayProjectModal} from './setup'
 
-function loadMainButtons() {
+function loadMainPage() {
 
     displayProjects()
-    loadProjectButtons()
     displayProjectModal()
 
     const buttons = document.querySelectorAll('#sidebar-button');
@@ -13,20 +12,8 @@ function loadMainButtons() {
         buttons[i].addEventListener('click', () => {
             displayHeading(buttons[i].textContent)
             displayProjects()
-            loadProjectButtons()
         })
     }
 }
 
-function loadProjectButtons() {
-
-    const buttons = document.querySelectorAll('#project-button');
-
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', () => {
-            displayHeading(buttons[i].textContent)
-        })
-    }
-}
-
-loadMainButtons()
+loadMainPage()
