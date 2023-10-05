@@ -14,7 +14,6 @@ function loadMainButtons() {
             displayHeading(buttons[i].textContent)
             displayProjects()
             loadProjectButtons()
-            displayProjectModal()
         })
     }
 }

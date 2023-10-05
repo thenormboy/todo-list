@@ -1,8 +1,11 @@
 import {project} from './todo.js'
 
 let projects = [];
-projects.push(project('Work'));
-projects.push(project('Gym'));
+let projectIndex = 0;
+projects.push(project('Work', projectIndex));
+projectIndex += 1;
+projects.push(project('Gym', projectIndex));
+projectIndex += 1;
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
