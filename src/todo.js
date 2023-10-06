@@ -3,11 +3,15 @@ const project = (name, ID, todos) => {
     const getID = () => ID
     const getTodos = () => todos
 
-    const updateName = newName => {
+    const setName = newName => {
         name = newName;
     }
 
-    return { getName, getID, getTodos, updateName }
+    const setID = newID => {
+        ID = newID;
+    }
+    
+    return { getName, getID, getTodos, setName, setID }
 }
 
 const todo = (name, description, duedate, priority) => {

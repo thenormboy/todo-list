@@ -5,9 +5,7 @@ import edit from './icons/edit.svg'
 let projects = [];
 let projectIndex = 0;
 projects.push(project('Work', projectIndex));
-projectIndex += 1;
 projects.push(project('Gym', projectIndex));
-projectIndex += 1;
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
@@ -16,12 +14,18 @@ function displayHeading(title) {
 
 function displayProjects() {
 
+    projectIndex = 0;
+
     const element = document.querySelector('.project-container')
     element.textContent = ''
 
     projects.forEach(displayProject);
 
     function displayProject(value) {
+
+        value.setID(projectIndex)
+        projectIndex += 1;
+
         const projectButton = document.createElement('div')
         projectButton.setAttribute('id', 'project-button')
         projectButton.textContent = value.getName()
@@ -30,6 +34,8 @@ function displayProjects() {
         iconContainer.classList.add('icon-container')
 
         const closeBtn = document.createElement('button')
+        closeBtn.setAttribute('id', 'close-project-btn')
+        closeBtn.classList.add(value.getID())
         const editBtn = document.createElement('button')
 
         const closeImg = document.createElement('img')
@@ -49,6 +55,7 @@ function displayProjects() {
     }
 
     loadProjectButtons()
+    loadProjectCloseBtns()
 }
 
 function loadProjectButtons() {
@@ -59,6 +66,30 @@ function loadProjectButtons() {
         buttons[i].addEventListener('click', () => {
             displayHeading(buttons[i].textContent)
         })
+    }
+}
+
+function loadProjectCloseBtns() {
+
+    const buttons = document.querySelectorAll('#close-project-btn')
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            projects.splice(projects.indexOf(selectProjectByID(buttons[i].classList[0]), 1))
+            displayProjects()
+        })
+    }
+    
+}
+
+function selectProjectByID(ID) {
+
+    projects.forEach(selectProject);
+
+    function selectProject(value) {
+        if (value.getID() == ID) {
+            return value;
+        }
     }
 }
 
