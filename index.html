@@ -9,6 +9,7 @@
     <script src="main.js" defer></script>
 
     <dialog id="project-modal">
+        <h3>New Project</h3>
         <form>
             <p>
                 <label for="projectName">Name: </label>
@@ -17,6 +18,20 @@
             <div>
                 <button id="cancelProjectBtn">Cancel</button>
                 <button id="confirmProjectBtn" value="default">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="edit-project-modal">
+        <h3>Edit Project</h3>
+        <form>
+            <p>
+                <label for="editProjectName">New Name: </label>
+                <input id="edit-project-name" type="text" name="editProjectName">
+            </p>
+            <div>
+                <button id="cancel-edit-project-btn">Cancel</button>
+                <button id="confirm-edit-project-btn">Confirm</button>
             </div>
         </form>
     </dialog>
