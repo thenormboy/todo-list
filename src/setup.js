@@ -36,7 +36,10 @@ function displayProjects() {
         const closeBtn = document.createElement('button')
         closeBtn.setAttribute('id', 'close-project-btn')
         closeBtn.classList.add(value.getID())
+
         const editBtn = document.createElement('button')
+        editBtn.setAttribute('id', 'edit-project-btn')
+        editBtn.classList.add(value.getID())
 
         const closeImg = document.createElement('img')
         closeImg.setAttribute('src', close)
@@ -56,6 +59,7 @@ function displayProjects() {
 
     loadProjectButtons()
     loadProjectCloseBtns()
+    loadProjectEditBtns();
 }
 
 function loadProjectButtons() {
@@ -75,23 +79,71 @@ function loadProjectCloseBtns() {
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
-            projects.splice(projects.indexOf(selectProjectByID(buttons[i].classList[0]), 1))
+            projects.splice(projects.indexOf(selectProjectByID(buttons[i].classList[0])), 1)
             displayProjects()
         })
     }
     
 }
 
+function loadProjectEditBtns() {
+
+    let currentID = 0;
+
+    const buttons = document.querySelectorAll('#edit-project-btn')
+    const editProjectModal = document.getElementById('edit-project-modal')
+    const editProjectName = document.getElementById('edit-project-name')
+    const cancelBtn = document.getElementById('cancel-edit-project-btn')
+    const confirmBtn = document.getElementById('confirm-edit-project-btn')
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            editProjectModal.showModal()
+            currentID = buttons[i].classList[0]
+        })
+    }
+
+    confirmBtn.addEventListener('click', (event) => {
+        event.preventDefault()
+        selectProjectByID(currentID).setName(editProjectName.value)
+        editProjectName.value = ''
+        editProjectModal.close();
+        displayProjects()
+    })
+
+    cancelBtn.addEventListener('click', (event) => {
+        event.preventDefault()
+        editProjectName.value = ''
+        editProjectModal.close()
+    })
+
+}
+
 function selectProjectByID(ID) {
+
+    let selectedProject = ''
 
     projects.forEach(selectProject);
 
     function selectProject(value) {
         if (value.getID() == ID) {
-            return value;
+            selectedProject = value
         }
     }
+
+    return selectedProject
 }
+
+//function selectProjectByID(ID) {
+
+//    let index = projects.findIndex(selectProjectIndex)
+
+
+ //   function selectProjectIndex(value, index, array) {
+  //      return
+ //   }
+//}
+
 
 function displayProjectModal() {
     const addProject = document.getElementById('add-project')
