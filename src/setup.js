@@ -1,4 +1,4 @@
-import {project} from './todo.js'
+import {project, todo} from './todo.js'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
 
@@ -6,8 +6,8 @@ let projects = [];
 let projectIndex = 0;
 
 let currentID = 0;
-projects.push(project('Work', projectIndex));
-projects.push(project('Gym', projectIndex));
+projects.push(project('Work', projectIndex, []));
+projects.push(project('Gym', projectIndex, []));
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
@@ -26,7 +26,6 @@ function displayProjects() {
     function displayProject(value) {
 
         value.setID(projectIndex)
-        projectIndex += 1;
 
         const projectButton = document.createElement('div')
         projectButton.setAttribute('id', 'project-button')
@@ -57,6 +56,8 @@ function displayProjects() {
         iconContainer.appendChild(closeBtn)
         projectButton.appendChild(iconContainer)
         element.appendChild(projectButton)
+
+        projectIndex += 1;
     }
 
     loadProjectButtons()
@@ -149,7 +150,7 @@ function displayProjectModal() {
 
     confirmBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        projects.push(project(projectName.value))
+        projects.push(project(projectName.value, projectIndex, []))
         projectName.value = ''
         projectModal.close()
         displayProjects()
@@ -160,6 +161,15 @@ function displayProjectModal() {
         projectName.value = ''
         projectModal.close()
     })
+}
+
+function displayTodo(project) {
+
+    const element = document.querySelector('todo-container')
+    element.textContent = ''
+
+
+
 }
 
 export {
