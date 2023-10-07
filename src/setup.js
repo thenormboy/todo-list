@@ -4,6 +4,8 @@ import edit from './icons/edit.svg'
 
 let projects = [];
 let projectIndex = 0;
+
+let currentID = 0;
 projects.push(project('Work', projectIndex));
 projects.push(project('Gym', projectIndex));
 
@@ -88,8 +90,6 @@ function loadProjectCloseBtns() {
 
 function loadProjectEditBtns() {
 
-    let currentID = 0;
-
     const buttons = document.querySelectorAll('#edit-project-btn')
     const editProjectModal = document.getElementById('edit-project-modal')
     const editProjectName = document.getElementById('edit-project-name')
@@ -104,6 +104,7 @@ function loadProjectEditBtns() {
     }
 
     confirmBtn.addEventListener('click', (event) => {
+        event.stopImmediatePropagation()
         event.preventDefault()
         selectProjectByID(currentID).setName(editProjectName.value)
         editProjectName.value = ''
@@ -112,11 +113,11 @@ function loadProjectEditBtns() {
     })
 
     cancelBtn.addEventListener('click', (event) => {
+        event.stopImmediatePropagation()
         event.preventDefault()
         editProjectName.value = ''
         editProjectModal.close()
     })
-
 }
 
 function selectProjectByID(ID) {
@@ -134,23 +135,11 @@ function selectProjectByID(ID) {
     return selectedProject
 }
 
-//function selectProjectByID(ID) {
-
-//    let index = projects.findIndex(selectProjectIndex)
-
-
- //   function selectProjectIndex(value, index, array) {
-  //      return
- //   }
-//}
-
-
 function displayProjectModal() {
+
     const addProject = document.getElementById('add-project')
     const projectModal = document.getElementById('project-modal')
-
     const projectName = document.getElementById('projectName')
-
     const cancelBtn = document.getElementById('cancelProjectBtn')
     const confirmBtn = document.getElementById('confirmProjectBtn')
 
