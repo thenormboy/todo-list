@@ -4,10 +4,10 @@ import edit from './icons/edit.svg'
 
 let projects = [];
 let projectIndex = 0;
-
+let currentProject = projects[0]
 let currentID = 0;
-projects.push(project('Work', projectIndex, []));
-projects.push(project('Gym', projectIndex, []));
+projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '56/56/5656'), todo('code', 'code a bunch', '78/78/7878')]));
+projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '9/19/1919'), todo('lift', 'lift the weights', '23/23/2323')]));
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
@@ -29,6 +29,7 @@ function displayProjects() {
 
         const projectButton = document.createElement('div')
         projectButton.setAttribute('id', 'project-button')
+        projectButton.classList.add(projectIndex)
         projectButton.textContent = value.getName()
 
         const iconContainer = document.createElement('div')
@@ -72,8 +73,10 @@ function loadProjectButtons() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
             displayHeading(buttons[i].textContent)
+            displayProjects()
         })
     }
+
 }
 
 function loadProjectCloseBtns() {
@@ -165,10 +168,49 @@ function displayProjectModal() {
 
 function displayTodo(project) {
 
-    const element = document.querySelector('todo-container')
+    const element = document.querySelector('.todo-container')
     element.textContent = ''
 
+    project.forEach(displayTodos)
 
+    function displayTodos(value) {
+
+        const todoSection = document.createElement('div')
+        todoSection.setAttribute('id', 'todo-button')
+        todoSection.textContent = value.getName()
+
+        const iconContainer = document.createElement('div')
+        iconContainer.classList.add('todo-icon-container')
+
+        const todoDuedate = document.createElement('div')
+        todoDuedate.setAttribute('id', 'todo-due-date')
+        todoDuedate.textContent = value.getDuedate()
+
+        const closeBtn = document.createElement('button')
+        closeBtn.setAttribute('id', 'close-todo-btn')
+        closeBtn.classList.add(value.getID())
+
+        const editBtn = document.createElement('button')
+        editBtn.setAttribute('id', 'edit-todo-btn')
+        editBtn.classList.add(value.getID())
+
+        const closeImg = document.createElement('img')
+        closeImg.setAttribute('src', close)
+        closeImg.classList.add('todo-icon-close')
+
+        const editImg = document.createElement('img')
+        editImg.setAttribute('src', edit)
+        editImg.classList.add('todo-icon-edit')
+
+        editBtn.appendChild(editImg)
+        closeBtn.appendChild(closeImg)
+        iconContainer.appendChild(todoDuedate)
+        iconContainer.appendChild(editBtn)
+        iconContainer.appendChild(closeBtn)
+        todoSection.appendChild(iconContainer)
+        element.appendChild(todoSection)
+
+    }
 
 }
 
