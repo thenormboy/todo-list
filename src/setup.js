@@ -61,22 +61,22 @@ function displayProjects() {
         projectIndex += 1;
     }
 
-    loadProjectButtons()
+    loadProjectInfo()
     loadProjectCloseBtns()
     loadProjectEditBtns();
 }
 
-function loadProjectButtons() {
+function loadProjectInfo() {
 
     const buttons = document.querySelectorAll('#project-button');
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
             displayHeading(buttons[i].textContent)
+            displayTodo(selectProjectByID(buttons[i].classList[0]).getTodos())
             displayProjects()
         })
     }
-
 }
 
 function loadProjectCloseBtns() {
