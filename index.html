@@ -36,6 +36,54 @@
         </form>
     </dialog>
 
+    <dialog id="todo-modal">
+        <h3>New Todo</h3>
+        <form>
+            <p>
+                <label for="todoName">Name: </label>
+                <input id="todo-name" type="text" name="todoName">
+            </p>
+            <p>
+                <label for="todoDesc">Name: </label>
+                <input id="todo-desc" type="text" name="todoDesc">
+            </p>
+            <p>
+                <label for="todoDuedate">Name: </label>
+                <input id="todo-duedate" type="text" name="todoDuedate">
+                <label for="todoPriority">Name: </label>
+                <input id="todo-priority" type="text" name="todoPriority">
+            </p>
+            <div>
+                <button id="cancel-todo-btn">Cancel</button>
+                <button id="confirm-todo-btn" value="default">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="edit-todo-modal">
+        <h3>New Todo</h3>
+        <form>
+            <p>
+                <label for="editTodoName">Name: </label>
+                <input id="edit-todo-name" type="text" name="editTodoName">
+            </p>
+            <p>
+                <label for="editTodoDesc">Name: </label>
+                <input id="edit-todo-desc" type="text" name="editTodoDesc">
+            </p>
+            <p>
+                <label for="editTodoDuedate">Name: </label>
+                <input id="edit-todo-duedate" type="text" name="editTodoDuedate">
+                <label for="editTodoPriority">Name: </label>
+                <input id="edit-todo-priority" type="text" name="editTodoPriority">
+            </p>
+            <div>
+                <button id="cancel-todo-btn">Cancel</button>
+                <button id="confirm-todo-btn" value="default">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+
     <div id="content">
         <div class="header">
             <div>
