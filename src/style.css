@@ -171,3 +171,39 @@ body {
     font-size: 20px;
     border-bottom: 1px solid black;
 }
+
+.todo-container {
+    width: 840px;
+    display: flex;
+    flex-direction: column;
+}
+
+#todo-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    border-bottom: 1px solid black;
+}
+
+.todo-icon-container {
+    display: flex;
+}
+
+.todo-icon-container button {
+    background: rgb(255, 255, 255, 0);
+    border: none;
+    cursor: pointer;
+}
+
+#edit-todo-btn {
+    height: 28px;
+    width: 28px;
+}
+
+#close-todo-btn {
+    height: 24px;
+    width: 24px;
+    padding-bottom: 3px;
+}

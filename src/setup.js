@@ -4,7 +4,7 @@ import edit from './icons/edit.svg'
 
 let projects = [];
 let projectIndex = 0;
-let currentProject = projects[0]
+let todoIndex = 0;
 let currentID = 0;
 projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '56/56/5656'), todo('code', 'code a bunch', '78/78/7878')]));
 projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '9/19/1919'), todo('lift', 'lift the weights', '23/23/2323')]));
@@ -73,7 +73,7 @@ function loadProjectInfo() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
             displayHeading(buttons[i].textContent)
-            displayTodo(selectProjectByID(buttons[i].classList[0]).getTodos())
+            displayTodo(selectProjectByID(buttons[i].classList[0]))
             displayProjects()
         })
     }
@@ -168,15 +168,20 @@ function displayProjectModal() {
 
 function displayTodo(project) {
 
+    todoIndex = 0;
+
     const element = document.querySelector('.todo-container')
     element.textContent = ''
 
-    project.forEach(displayTodos)
+    project.getTodos().forEach(displayTodos)
 
     function displayTodos(value) {
 
+        value.setID(todoIndex) 
+
         const todoSection = document.createElement('div')
         todoSection.setAttribute('id', 'todo-button')
+        todoSection.classList.add(todoIndex)
         todoSection.textContent = value.getName()
 
         const iconContainer = document.createElement('div')
@@ -210,8 +215,41 @@ function displayTodo(project) {
         todoSection.appendChild(iconContainer)
         element.appendChild(todoSection)
 
+        todoIndex += 1;
+
     }
 
+    loadTodoCloseBtns(project)
+
+}
+
+function loadTodoCloseBtns(project) {
+
+    let todoArray = project.getTodos()
+
+    const buttons = document.querySelectorAll('#close-todo-btn')
+
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            todoArray.splice(todoArray.indexOf(selectTodoByID(buttons[i].classList[0], project)), 1)
+            displayTodo(project)
+        })
+    }
+
+}
+
+function selectTodoByID(ID, project) {
+
+    let selectedTodo = ''
+
+    project.getTodos().forEach(selectTodo);
+
+    function selectTodo(value) {
+        if (value.getID() == ID) {
+            selectedTodo = value
+        }
+    }
+    return selectedTodo
 }
 
 export {
