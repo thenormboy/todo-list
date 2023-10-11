@@ -71,9 +71,12 @@ function loadProjectInfo() {
     const buttons = document.querySelectorAll('#project-button');
 
     for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', () => {
+        buttons[i].addEventListener('click', (event) => {
             displayHeading(buttons[i].textContent)
             displayTodo(selectProjectByID(buttons[i].classList[0]))
+            setupAddTodoButton(selectProjectByID(buttons[i].classList[0]))
+            //console.log(selectProjectByID(buttons[i].classList[0]).getName())
+            displayTodoModal(selectProjectByID(buttons[i].classList[0]))
             displayProjects()
         })
     }
@@ -252,8 +255,66 @@ function selectTodoByID(ID, project) {
     return selectedTodo
 }
 
+function setupAddTodoButton(project) {
+    let ID = project.getID()
+    const element = document.querySelector('.btn-container')
+    element.textContent = ''
+
+    const addBtn = document.createElement('button')
+    addBtn.setAttribute('id', 'add-todo-' + ID)
+    addBtn.textContent = 'New Task'
+
+    element.appendChild(addBtn)
+}
+
+function displayTodoModal(project) {
+
+    let ID = project.getID()
+    let currentTodo = todo()
+
+    const addTodo = document.getElementById('add-todo-' + ID)
+    const todoModal = document.getElementById('todo-modal')
+    const todoName = document.getElementById('todo-name')
+    const todoDesc = document.getElementById('todo-desc')
+    const todoDuedate = document.getElementById('todo-duedate')
+    const todoPriority = document.getElementById('todo-priority')
+    const cancelBtn = document.getElementById('cancel-todo-btn')
+    const confirmBtn = document.getElementById('confirm-todo-btn')
+
+    addTodo.addEventListener('click', () => {
+        todoModal.showModal()
+    })
+
+    confirmBtn.addEventListener('click', (event) => {
+        event.stopImmediatePropagation()
+        event.preventDefault();
+        currentTodo.setName(todoName.value)
+        currentTodo.setDescription(todoDesc.value)
+        currentTodo.setDuedate(todoDuedate.value)
+        currentTodo.setPriority(todoPriority.value)
+        currentTodo.setID(todoIndex)
+        console.log(project.getName())
+        project.setTodo(currentTodo)
+        todoName.value = ''
+        todoDesc.value = ''
+        todoDuedate.value = ''
+        todoPriority.value = ''
+        todoModal.close()
+        displayTodo(project)
+    })
+
+    cancelBtn.addEventListener('click', (event) => {
+        event.preventDefault()
+        todoName.value = ''
+        todoDesc.value = ''
+        todoDuedate.value = ''
+        todoPriority.value = ''
+        todoModal.close()
+    })
+}
+
 export {
     displayHeading,
     displayProjects,
-    displayProjectModal
+    displayProjectModal,
 }
