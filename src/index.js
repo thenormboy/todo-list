@@ -1,5 +1,5 @@
 import './style.css'
-import {displayHeading, displayProjects, displayProjectModal} from './setup'
+import {displayHeading, displayProjects, displayProjectModal} from './project'
 
 function loadMainPage() {
 
