@@ -1,4 +1,4 @@
-const project = (name, ID, todos) => {
+function project (name, ID, todos) {
     const getName = () => name;
     const getID = () => ID
     const getTodos = () => todos
@@ -25,7 +25,7 @@ const project = (name, ID, todos) => {
     }
 }
 
-const todo = (name, description, duedate, priority, ID) => {
+function todo (name, description, duedate, priority, ID) {
     const getName = () => name;
     const getDescription = () => description;
     const getDuedate = () => duedate;

@@ -16,6 +16,7 @@ function displayTodo(project) {
     function displayTodos(value) {
 
         value.setID(todoIndex) 
+        console.log(value.getName())
 
         const todoSection = document.createElement('div')
         todoSection.setAttribute('id', 'todo-button')
@@ -115,13 +116,10 @@ function loadTodoEditBtns(project) {
     
             const modalCancelBtn = document.getElementById('cancel-edit-todo-btn-' + ID + ' ' + project.getName())
             const modalConfirmBtn = document.getElementById('confirm-edit-todo-btn-' + ID + ' ' + project.getName())
-            console.log(currentTodo.getName())
         
-
             modalCancelBtn.addEventListener('click', (event) => {
                 event.stopImmediatePropagation()
                 event.preventDefault()
-                console.log(currentTodo.getName())
                 editTodoName.value = ''
                 editTodoDesc.value = ''
                 editTodoDuedate.value = ''
@@ -171,8 +169,6 @@ function setupAddTodoButton(project) {
     addBtn.textContent = 'New Task'
 
     element.appendChild(addBtn)
-
-    setupAddTodoModal(project)
 }
 
 function setupAddTodoModal(project) {
@@ -195,10 +191,9 @@ function setupAddTodoModal(project) {
 
 function displayTodoModal(project) {
 
-    setupAddTodoButton(project)
-
     let ID = project.getID()
     let currentTodo = todo()
+    setupAddTodoButton(project)
 
     const addTodo = document.getElementById('add-todo-' + ID)
     const todoModal = document.getElementById('todo-modal')
@@ -206,37 +201,38 @@ function displayTodoModal(project) {
     const todoDesc = document.getElementById('todo-desc')
     const todoDuedate = document.getElementById('todo-duedate')
     const todoPriority = document.getElementById('todo-priority')
-    const cancelBtn = document.getElementById('cancel-todo-btn-' + ID)
-    const confirmBtn = document.getElementById('confirm-todo-btn-' + ID)
 
     addTodo.addEventListener('click', () => {
         todoModal.showModal()
-    })
+        setupAddTodoModal(project)
+        const cancelBtn = document.getElementById('cancel-todo-btn-' + ID)
+        const confirmBtn = document.getElementById('confirm-todo-btn-' + ID)
 
-    confirmBtn.addEventListener('click', (event) => {
-        event.stopImmediatePropagation()
-        event.preventDefault();
-        currentTodo.setName(todoName.value)
-        currentTodo.setDescription(todoDesc.value)
-        currentTodo.setDuedate(todoDuedate.value)
-        currentTodo.setPriority(todoPriority.value)
-        currentTodo.setID(todoIndex)
-        project.setTodo(currentTodo)
-        todoName.value = ''
-        todoDesc.value = ''
-        todoDuedate.value = ''
-        todoPriority.value = ''
-        todoModal.close()
-        displayTodo(project)
-    })
+        confirmBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            currentTodo.setName(todoName.value)
+            currentTodo.setDescription(todoDesc.value)
+            currentTodo.setDuedate(todoDuedate.value)
+            currentTodo.setPriority(todoPriority.value)
+            currentTodo.setID(todoIndex)
+            project.setTodo(currentTodo)
+            currentTodo = todo()
+            todoName.value = ''
+            todoDesc.value = ''
+            todoDuedate.value = ''
+            todoPriority.value = ''
+            todoModal.close()
+            displayTodo(project)
+        })
 
-    cancelBtn.addEventListener('click', (event) => {
-        event.preventDefault()
-        todoName.value = ''
-        todoDesc.value = ''
-        todoDuedate.value = ''
-        todoPriority.value = ''
-        todoModal.close()
+        cancelBtn.addEventListener('click', (event) => {
+            event.preventDefault()
+            todoName.value = ''
+            todoDesc.value = ''
+            todoDuedate.value = ''
+            todoPriority.value = ''
+            todoModal.close()
+        })
     })
 }
 
