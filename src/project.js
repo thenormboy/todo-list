@@ -74,9 +74,7 @@ function loadProjectInfo() {
         buttons[i].addEventListener('click', (event) => {
             displayHeading(buttons[i].textContent)
             displayTodo(selectProjectByID(buttons[i].classList[0]))
-            //console.log(selectProjectByID(buttons[i].classList[0]).getName())
             displayTodoModal(selectProjectByID(buttons[i].classList[0]))
-            displayProjects()
         })
     }
 }

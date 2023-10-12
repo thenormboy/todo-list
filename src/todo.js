@@ -100,6 +100,26 @@ function setupAddTodoButton(project) {
     addBtn.textContent = 'New Task'
 
     element.appendChild(addBtn)
+
+    setupAddTodoModal(project)
+}
+
+function setupAddTodoModal(project) {
+    let ID = project.getID()
+    const element = document.querySelector('.todo-dialog-btns')
+    element.textContent = ''
+
+    const cancelBtn = document.createElement('button')
+    cancelBtn.setAttribute('id', 'cancel-todo-btn-' + ID)
+    cancelBtn.textContent = 'Cancel'
+
+    const confirmBtn = document.createElement('button')
+    confirmBtn.setAttribute('id', 'confirm-todo-btn-' + ID)
+    confirmBtn.setAttribute('value', 'default')
+    confirmBtn.textContent = 'Confirm'
+
+    element.appendChild(cancelBtn)
+    element.appendChild(confirmBtn)
 }
 
 function displayTodoModal(project) {
@@ -115,8 +135,8 @@ function displayTodoModal(project) {
     const todoDesc = document.getElementById('todo-desc')
     const todoDuedate = document.getElementById('todo-duedate')
     const todoPriority = document.getElementById('todo-priority')
-    const cancelBtn = document.getElementById('cancel-todo-btn')
-    const confirmBtn = document.getElementById('confirm-todo-btn')
+    const cancelBtn = document.getElementById('cancel-todo-btn-' + ID)
+    const confirmBtn = document.getElementById('confirm-todo-btn-' + ID)
 
     addTodo.addEventListener('click', () => {
         todoModal.showModal()
