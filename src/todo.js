@@ -32,10 +32,12 @@ function displayTodo(project) {
         const closeBtn = document.createElement('button')
         closeBtn.setAttribute('id', 'close-todo-btn')
         closeBtn.classList.add(value.getID())
+        closeBtn.classList.add('close-todo-btn')
 
         const editBtn = document.createElement('button')
-        editBtn.setAttribute('id', 'edit-todo-btn')
+        editBtn.setAttribute('id', 'edit-todo-btn-' + value.getID() + ' ' + project.getName())
         editBtn.classList.add(value.getID())
+        editBtn.classList.add('edit-todo-btn')
 
         const closeImg = document.createElement('img')
         closeImg.setAttribute('src', close)
@@ -58,6 +60,7 @@ function displayTodo(project) {
     }
 
     loadTodoCloseBtns(project)
+    loadTodoEditBtns(project)
 
 }
 
@@ -74,6 +77,74 @@ function loadTodoCloseBtns(project) {
         })
     }
 
+}
+
+function loadTodoEditBtns(project) {
+
+    let todoArray = project.getTodos()
+    todoArray.forEach(setupModalButtons)
+
+    function setupModalButtons(value) {
+
+        let ID = value.getID()
+        let currentTodo = selectTodoByID(ID, project)
+
+        const button = document.getElementById('edit-todo-btn-' + ID + ' ' + project.getName())
+        const editTodoModal = document.getElementById('edit-todo-modal')
+        const editTodoName = document.getElementById('edit-todo-name')
+        const editTodoDesc = document.getElementById('edit-todo-desc')
+        const editTodoDuedate = document.getElementById('edit-todo-duedate')
+        const editTodoPriority = document.getElementById('edit-todo-priority')
+
+        button.addEventListener('click', () => {
+            editTodoModal.showModal()
+            const element = document.querySelector('.edit-todo-dialog-btns')
+            element.textContent = ''
+    
+            const cancelBtn = document.createElement('button')
+            cancelBtn.setAttribute('id', 'cancel-edit-todo-btn-' + ID + ' ' + project.getName())
+            cancelBtn.textContent = 'Cancel'
+        
+            const confirmBtn = document.createElement('button')
+            confirmBtn.setAttribute('id', 'confirm-edit-todo-btn-' + ID + ' ' + project.getName())
+            confirmBtn.setAttribute('value', 'default')
+            confirmBtn.textContent = 'Confirm'
+        
+            element.appendChild(cancelBtn)
+            element.appendChild(confirmBtn)
+    
+            const modalCancelBtn = document.getElementById('cancel-edit-todo-btn-' + ID + ' ' + project.getName())
+            const modalConfirmBtn = document.getElementById('confirm-edit-todo-btn-' + ID + ' ' + project.getName())
+            console.log(currentTodo.getName())
+        
+
+            modalCancelBtn.addEventListener('click', (event) => {
+                event.stopImmediatePropagation()
+                event.preventDefault()
+                console.log(currentTodo.getName())
+                editTodoName.value = ''
+                editTodoDesc.value = ''
+                editTodoDuedate.value = ''
+                editTodoPriority.value = ''
+                editTodoModal.close()
+            })
+
+            modalConfirmBtn.addEventListener('click', (event) => {
+                event.stopImmediatePropagation()
+                event.preventDefault()
+                currentTodo.setName(editTodoName.value)
+                currentTodo.setDescription(editTodoDesc.value)
+                currentTodo.setDuedate(editTodoDuedate.value)
+                currentTodo.setPriority(editTodoPriority.value)
+                editTodoName.value = ''
+                editTodoDesc.value = ''
+                editTodoDuedate.value = ''
+                editTodoPriority.value = ''
+                editTodoModal.close()
+                displayTodo(project)
+            })
+        })
+    }
 }
 
 function selectTodoByID(ID, project) {
@@ -150,7 +221,6 @@ function displayTodoModal(project) {
         currentTodo.setDuedate(todoDuedate.value)
         currentTodo.setPriority(todoPriority.value)
         currentTodo.setID(todoIndex)
-        console.log(project.getName())
         project.setTodo(currentTodo)
         todoName.value = ''
         todoDesc.value = ''

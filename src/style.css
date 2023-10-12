@@ -197,12 +197,12 @@ body {
     cursor: pointer;
 }
 
-#edit-todo-btn {
+.edit-todo-btn {
     height: 28px;
     width: 28px;
 }
 
-#close-todo-btn {
+.close-todo-btn {
     height: 24px;
     width: 24px;
     padding-bottom: 3px;
