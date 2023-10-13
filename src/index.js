@@ -1,7 +1,9 @@
 import './style.css'
-import {displayHeading, displayProjects, displayProjectModal} from './project'
+import {displayHeading, displayProjects, displayProjectModal, displayInboxTodos} from './project'
 
 function loadMainPage() {
+
+    loadInbox()
 
     displayProjects()
     displayProjectModal()
@@ -14,6 +16,17 @@ function loadMainPage() {
             displayProjects()
         })
     }
+}
+
+function loadInbox() {
+
+    displayInboxTodos()
+    const button = document.querySelector('#inbox-button');
+
+    button.addEventListener('click', () => {
+        displayHeading('Inbox')
+        displayInboxTodos()
+    })
 }
 
 loadMainPage()

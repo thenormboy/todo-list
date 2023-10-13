@@ -25,6 +25,21 @@ function project (name, ID, todos) {
     }
 }
 
+function inbox (todos) {
+    const getTodos = () => todos
+    const getName = () => 'Inbox'
+
+    const setTodo = todo => {
+        todos.push(todo)
+    }
+
+    return {
+        getTodos,
+        getName,
+        setTodo
+    }
+}
+
 function todo (name, description, duedate, priority, ID) {
     const getName = () => name;
     const getDescription = () => description;
@@ -69,5 +84,6 @@ function todo (name, description, duedate, priority, ID) {
 
 export {
     project,
+    inbox,
     todo
 }

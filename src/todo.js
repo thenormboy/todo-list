@@ -16,7 +16,6 @@ function displayTodo(project) {
     function displayTodos(value) {
 
         value.setID(todoIndex) 
-        console.log(value.getName())
 
         const todoSection = document.createElement('div')
         todoSection.setAttribute('id', 'todo-button')

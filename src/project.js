@@ -1,4 +1,4 @@
-import {project, todo} from './object.js'
+import {project, inbox, todo} from './object.js'
 import {displayTodo, displayTodoModal} from './todo.js'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
@@ -6,6 +6,7 @@ import edit from './icons/edit.svg'
 let projects = [];
 let projectIndex = 0;
 let currentID = 0;
+let inboxTodos = inbox([])
 projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '56/56/5656'), todo('code', 'code a bunch', '78/78/7878'), todo('nut', 'code a bunch', 'not'), todo('livr', 'code a bunch', 'goyf'),todo('tsrm', 'code a bunch', 'fere')]));
 projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '9/19/1919'), todo('lift', 'lift the weights', '23/23/2323'), todo('kisf', 'code a bunch', 'rsfr'), todo('cvev', 'code a bunch', 'hhhht'), todo('eert', 'code a bunch', 'bbob')]));
 projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', 'a'), todo('aa', 'code a bunch', 'aa'), todo('aaa', 'code a bunch', 'aaa'), todo('aaaa', 'code a bunch', 'aaaa'),todo('aaaaa', 'code a bunch', 'aaaaa')]));
@@ -13,7 +14,11 @@ projects.push(project('SSS', projectIndex, [todo('s', 'go for a run', 's'), todo
 projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', 'd'), todo('dd', 'code a bunch', 'dd'), todo('ddd', 'code a bunch', 'ddd'), todo('dddd', 'code a bunch', 'dddd'),todo('ddddd', 'code a bunch', 'ddddd')]));
 projects.push(project('FFF', projectIndex, [todo('f', 'go for a run', 'f'), todo('ff', 'lift the weights', 'ff'), todo('fff', 'code a bunch', 'fff'), todo('ffff', 'code a bunch', 'ffff'), todo('fffff', 'code a bunch', 'fffff')]));
 
-
+function displayInboxTodos() {
+    addTodosToInbox()
+    displayTodo(inboxTodos)
+    inboxTodos = inbox([])
+}
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
@@ -172,9 +177,20 @@ function displayProjectModal() {
     })
 }
 
+function addTodosToInbox() {
+    projects.forEach(getProject)
+    function getProject(project) {
+
+        project.getTodos().forEach(getTodo)
+        function getTodo(todo) {
+            inboxTodos.setTodo(todo)
+        }
+    }
+}
 
 export {
     displayHeading,
     displayProjects,
     displayProjectModal,
+    displayInboxTodos
 }
