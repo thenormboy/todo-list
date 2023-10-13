@@ -15,9 +15,9 @@ projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', 'd'), tod
 projects.push(project('FFF', projectIndex, [todo('f', 'go for a run', 'f'), todo('ff', 'lift the weights', 'ff'), todo('fff', 'code a bunch', 'fff'), todo('ffff', 'code a bunch', 'ffff'), todo('fffff', 'code a bunch', 'fffff')]));
 
 function displayInboxTodos() {
+    inboxTodos = inbox([])
     addTodosToInbox()
     displayTodo(inboxTodos)
-    inboxTodos = inbox([])
 }
 
 function displayHeading(title) {
@@ -95,9 +95,12 @@ function loadProjectCloseBtns() {
     const buttons = document.querySelectorAll('#close-project-btn')
 
     for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', () => {
+        buttons[i].addEventListener('click', (event) => {
+            event.stopPropagation()
             projects.splice(projects.indexOf(selectProjectByID(buttons[i].classList[0])), 1)
             displayProjects()
+            displayHeading('Inbox')
+            displayInboxTodos()
         })
     }
     
