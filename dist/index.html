@@ -8,77 +8,79 @@
 <body>
     <script src="main.js" defer></script>
 
-    <dialog id="project-modal">
-        <h3>New Project</h3>
-        <form>
-            <p>
-                <label for="projectName">Name: </label>
-                <input id="projectName" type="text" name="projectName">
-            </p>
-            <div>
-                <button id="cancelProjectBtn">Cancel</button>
-                <button id="confirmProjectBtn" value="default">Confirm</button>
-            </div>
-        </form>
-    </dialog>
+    <div class="dialogs">
+        <dialog id="project-modal">
+            <h3>New Project</h3>
+            <form>
+                <p>
+                    <label for="projectName">Name: </label>
+                    <input id="projectName" type="text" name="projectName">
+                </p>
+                <div>
+                    <button id="cancelProjectBtn">Cancel</button>
+                    <button id="confirmProjectBtn" value="default">Confirm</button>
+                </div>
+            </form>
+        </dialog>
 
-    <dialog id="edit-project-modal">
-        <h3>Edit Project</h3>
-        <form>
-            <p>
-                <label for="editProjectName">New Name: </label>
-                <input id="edit-project-name" type="text" name="editProjectName">
-            </p>
-            <div>
-                <button id="cancel-edit-project-btn">Cancel</button>
-                <button id="confirm-edit-project-btn">Confirm</button>
-            </div>
-        </form>
-    </dialog>
+        <dialog id="edit-project-modal">
+            <h3>Edit Project</h3>
+            <form>
+                <p>
+                    <label for="editProjectName">New Name: </label>
+                    <input id="edit-project-name" type="text" name="editProjectName">
+                </p>
+                <div>
+                    <button id="cancel-edit-project-btn">Cancel</button>
+                    <button id="confirm-edit-project-btn">Confirm</button>
+                </div>
+            </form>
+        </dialog>
 
-    <dialog id="todo-modal">
-        <h3>New Todo</h3>
-        <form>
-            <p>
-                <label for="todoName">Name: </label>
-                <input id="todo-name" type="text" name="todoName">
-            </p>
-            <p>
-                <label for="todoDesc">Name: </label>
-                <input id="todo-desc" type="text" name="todoDesc">
-            </p>
-            <p>
-                <label for="todoDuedate">Name: </label>
-                <input id="todo-duedate" type="text" name="todoDuedate">
-                <label for="todoPriority">Name: </label>
-                <input id="todo-priority" type="text" name="todoPriority">
-            </p>
-            <div class="todo-dialog-btns">
-            </div>
-        </form>
-    </dialog>
+        <dialog id="todo-modal">
+            <h3>New Todo</h3>
+            <form>
+                <p>
+                    <label for="todoName">Name: </label>
+                    <input id="todo-name" type="text" name="todoName">
+                </p>
+                <p>
+                    <label for="todoDesc">Name: </label>
+                    <input id="todo-desc" type="text" name="todoDesc">
+                </p>
+                <p>
+                    <label for="todoDuedate">Name: </label>
+                    <input id="todo-duedate" type="text" name="todoDuedate">
+                    <label for="todoPriority">Name: </label>
+                    <input id="todo-priority" type="text" name="todoPriority">
+                </p>
+                <div class="todo-dialog-btns">
+                </div>
+            </form>
+        </dialog>
 
-    <dialog id="edit-todo-modal">
-        <h3>New Todo</h3>
-        <form>
-            <p>
-                <label for="editTodoName">Name: </label>
-                <input id="edit-todo-name" type="text" name="editTodoName">
-            </p>
-            <p>
-                <label for="editTodoDesc">Name: </label>
-                <input id="edit-todo-desc" type="text" name="editTodoDesc">
-            </p>
-            <p>
-                <label for="editTodoDuedate">Name: </label>
-                <input id="edit-todo-duedate" type="text" name="editTodoDuedate">
-                <label for="editTodoPriority">Name: </label>
-                <input id="edit-todo-priority" type="text" name="editTodoPriority">
-            </p>
-            <div class="edit-todo-dialog-btns">
-            </div>
-        </form>
-    </dialog>
+        <dialog id="edit-todo-modal">
+            <h3>New Todo</h3>
+            <form>
+                <p>
+                    <label for="editTodoName">Name: </label>
+                    <input id="edit-todo-name" type="text" name="editTodoName">
+                </p>
+                <p>
+                    <label for="editTodoDesc">Name: </label>
+                    <input id="edit-todo-desc" type="text" name="editTodoDesc">
+                </p>
+                <p>
+                    <label for="editTodoDuedate">Name: </label>
+                    <input id="edit-todo-duedate" type="text" name="editTodoDuedate">
+                    <label for="editTodoPriority">Name: </label>
+                    <input id="edit-todo-priority" type="text" name="editTodoPriority">
+                </p>
+                <div class="edit-todo-dialog-btns">
+                </div>
+            </form>
+        </dialog>
+    </div>
 
     <div id="content">
         <div class="header">

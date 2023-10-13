@@ -115,19 +115,21 @@ function loadProjectEditBtns() {
     const confirmBtn = document.getElementById('confirm-edit-project-btn')
 
     for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', () => {
+        buttons[i].addEventListener('click', (event) => {
+            event.stopPropagation()
             editProjectModal.showModal()
             currentID = buttons[i].classList[0]
         })
     }
 
     confirmBtn.addEventListener('click', (event) => {
-        event.stopImmediatePropagation()
+        event.stopPropagation()
         event.preventDefault()
         selectProjectByID(currentID).setName(editProjectName.value)
         editProjectName.value = ''
         editProjectModal.close();
         displayProjects()
+        displayHeading(selectProjectByID(currentID).getName())
     })
 
     cancelBtn.addEventListener('click', (event) => {
