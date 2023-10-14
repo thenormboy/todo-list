@@ -1,4 +1,4 @@
-import {todo} from './object.js'
+import { todo } from './object.js'
 import { intlFormat } from 'date-fns'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'

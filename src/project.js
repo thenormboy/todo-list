@@ -1,15 +1,12 @@
-import {project, inbox, todo} from './object.js'
-import {displayTodo, displayTodoModal} from './todo.js'
-import { format, compareAsc, isWithinInterval, addWeeks, sub, add } from 'date-fns'
+import { project, todo } from './object.js'
+import { displayTodo, displayTodoModal } from './todo.js'
+import { sortDates, displayInboxTodos } from './inbox.js'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
 
 let projects = [];
 let projectIndex = 0;
 let currentID = 0;
-let inboxTodos = inbox([])
-let weekInboxTodos = inbox([])
-let todayInboxTodos = inbox([])
 projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '2023-10-13', 'low'), todo('code', 'code a bunch', '2023-10-17', 'medium'), todo('nut', 'code a bunch', '2023-10-14', 'high'), todo('livr', 'code a bunch', '2023-10-15', 'low'),todo('tsrm', 'code a bunch', '2023-10-20', 'medium')]));
 projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '2023-11-17', 'high'), todo('lift', 'lift the weights', '2023-10-18', 'low'), todo('kisf', 'code a bunch', '2023-10-19', 'medium'), todo('cvev', 'code a bunch', '2023-10-20', 'high'), todo('eert', 'code a bunch', '2023-10-21', 'low')]));
 projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', '2023-10-18', 'medium'), todo('aa', 'code a bunch', '2023-10-19', 'high'), todo('aaa', 'code a bunch', '2023-11-20', 'low'), todo('aaaa', 'code a bunch', '2023-10-21', 'medium'),todo('aaaaa', 'code a bunch', '2023-10-15', 'high')]));
@@ -17,74 +14,6 @@ projects.push(project('SSS', projectIndex, [todo('s', 'go for a run', '2023-10-1
 projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', '2023-10-20', 'high'), todo('dd', 'code a bunch', '2023-10-21', 'low'), todo('ddd', 'code a bunch', '2023-10-22', 'medium'), todo('dddd', 'code a bunch', '2023-11-23', 'high'),todo('ddddd', 'code a bunch', '2023-10-24', 'low')]));
 projects.push(project('FFF', projectIndex, [todo('f', 'go for a run', '2023-10-21', 'medium'), todo('ff', 'lift the weights', '2023-10-22', 'high'), todo('fff', 'code a bunch', '2023-10-23', 'low'), todo('ffff', 'code a bunch', '2023-10-24', 'medium'), todo('fffff', 'code a bunch', '2023-11-25', 'high')]));
 
-
-function sortDates(project) {
-    format(new Date(), 'MM-dd-yyyy')
-
-    project.getTodos().sort(function(a, b) {
-        let firstDate = new Date(a.getDuedate())
-        let secondDate = new Date(b.getDuedate())
-        return compareAsc(firstDate, secondDate)
-    })
-}
-
-function addTodosToWeekInbox() {
-    inboxTodos.getTodos().forEach(getTodo)
-
-    function getTodo(todo) {
-        if (isWithinInterval(new Date(todo.getDuedate()), {
-            start: sub(new Date(), {days: 1}),
-            end: sub(addWeeks(new Date(), 1), {days: 1})
-            })) {
-                weekInboxTodos.setTodo(todo)
-        }
-    }
-}
-
-function displayWeekInboxTodos() {
-    weekInboxTodos = inbox([])
-    addTodosToWeekInbox()
-    sortDates(weekInboxTodos)
-    displayTodo(weekInboxTodos)
-}
-
-function addTodosToTodayInbox() {
-    inboxTodos.getTodos().forEach(getTodo)
-
-    function getTodo(todo) {
-        if (isWithinInterval(new Date(todo.getDuedate()), {
-            start: sub(new Date(), {days: 1}),
-            end: new Date()
-            })) {
-                todayInboxTodos.setTodo(todo)
-        }
-    }
-}
-
-function displayTodayInboxTodos() {
-    todayInboxTodos = inbox([])
-    addTodosToTodayInbox()
-    sortDates(todayInboxTodos)
-    displayTodo(todayInboxTodos)
-}
-
-function addTodosToInbox() {
-    projects.forEach(getProject)
-    function getProject(project) {
-
-        project.getTodos().forEach(getTodo)
-        function getTodo(todo) {
-            inboxTodos.setTodo(todo)
-        }
-    }
-}
-
-function displayInboxTodos() {
-    inboxTodos = inbox([])
-    addTodosToInbox()
-    sortDates(inboxTodos)
-    displayTodo(inboxTodos)
-}
 
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
@@ -256,7 +185,5 @@ export {
     displayHeading,
     displayProjects,
     displayProjectModal,
-    displayInboxTodos,
-    displayWeekInboxTodos,
-    displayTodayInboxTodos
+    projects
 }
