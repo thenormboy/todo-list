@@ -34,7 +34,9 @@ function displayTodo(project) {
 
         const todoDuedate = document.createElement('div')
         todoDuedate.setAttribute('id', 'todo-due-date')
-        todoDuedate.textContent = intlFormat(new Date(value.getDuedate()))
+        todoDuedate.textContent = intlFormat(new Date(value.getDuedate()), {
+            timeZone: 'UTC',
+        })
 
         const closeBtn = document.createElement('button')
         closeBtn.setAttribute('id', 'close-todo-btn')
