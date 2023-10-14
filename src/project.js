@@ -1,6 +1,6 @@
 import {project, inbox, todo} from './object.js'
 import {displayTodo, displayTodoModal} from './todo.js'
-import { format, compareAsc } from 'date-fns'
+import { format, compareAsc, isWithinInterval, addWeeks } from 'date-fns'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
 
@@ -8,6 +8,7 @@ let projects = [];
 let projectIndex = 0;
 let currentID = 0;
 let inboxTodos = inbox([])
+let weekInboxTodos = inbox([])
 projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '2023-10-16', 'low'), todo('code', 'code a bunch', '2023-10-17', 'medium'), todo('nut', 'code a bunch', '2023-10-18', 'high'), todo('livr', 'code a bunch', '2023-10-19', 'low'),todo('tsrm', 'code a bunch', '2023-10-20', 'medium')]));
 projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '2023-11-17', 'high'), todo('lift', 'lift the weights', '2023-10-18', 'low'), todo('kisf', 'code a bunch', '2023-10-19', 'medium'), todo('cvev', 'code a bunch', '2023-10-20', 'high'), todo('eert', 'code a bunch', '2023-10-21', 'low')]));
 projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', '2023-10-18', 'medium'), todo('aa', 'code a bunch', '2023-10-19', 'high'), todo('aaa', 'code a bunch', '2023-11-20', 'low'), todo('aaaa', 'code a bunch', '2023-10-21', 'medium'),todo('aaaaa', 'code a bunch', '2023-10-22', 'high')]));
@@ -24,6 +25,26 @@ function sortDates(project) {
         let secondDate = new Date(b.getDuedate())
         return compareAsc(firstDate, secondDate)
     })
+}
+
+function addTodosToWeekInbox() {
+    inboxTodos.getTodos().forEach(getTodo)
+
+    function getTodo(todo) {
+        if (isWithinInterval(new Date(todo.getDuedate()), {
+            start: new Date(),
+            end: addWeeks(new Date(), 1)
+            })) {
+                weekInboxTodos.setTodo(todo)
+        }
+    }
+}
+
+function displayWeekInboxTodos() {
+    weekInboxTodos = inbox([])
+    addTodosToWeekInbox()
+    sortDates(weekInboxTodos)
+    displayTodo(weekInboxTodos)
 }
 
 function addTodosToInbox() {
@@ -214,5 +235,6 @@ export {
     displayHeading,
     displayProjects,
     displayProjectModal,
-    displayInboxTodos
+    displayInboxTodos,
+    displayWeekInboxTodos
 }

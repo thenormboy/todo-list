@@ -1,8 +1,9 @@
 import './style.css'
-import {displayHeading, displayProjects, displayProjectModal, displayInboxTodos} from './project'
+import {displayHeading, displayProjects, displayProjectModal, displayInboxTodos, displayWeekInboxTodos} from './project'
 
 function loadMainPage() {
 
+    loadWeekInbox()
     loadInbox()
 
     displayProjects()
@@ -26,6 +27,16 @@ function loadInbox() {
     button.addEventListener('click', () => {
         displayHeading('Inbox')
         displayInboxTodos()
+    })
+}
+
+function loadWeekInbox() {
+    displayWeekInboxTodos()
+    const button = document.querySelector('#week-button');
+
+    button.addEventListener('click', () => {
+        displayHeading('This Week')
+        displayWeekInboxTodos()
     })
 }
 
