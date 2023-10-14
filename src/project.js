@@ -1,5 +1,6 @@
 import {project, inbox, todo} from './object.js'
 import {displayTodo, displayTodoModal} from './todo.js'
+import { format, compareAsc } from 'date-fns'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
 
@@ -7,16 +8,39 @@ let projects = [];
 let projectIndex = 0;
 let currentID = 0;
 let inboxTodos = inbox([])
-projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '56/56/5656'), todo('code', 'code a bunch', '78/78/7878'), todo('nut', 'code a bunch', 'not'), todo('livr', 'code a bunch', 'goyf'),todo('tsrm', 'code a bunch', 'fere')]));
-projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '9/19/1919'), todo('lift', 'lift the weights', '23/23/2323'), todo('kisf', 'code a bunch', 'rsfr'), todo('cvev', 'code a bunch', 'hhhht'), todo('eert', 'code a bunch', 'bbob')]));
-projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', 'a'), todo('aa', 'code a bunch', 'aa'), todo('aaa', 'code a bunch', 'aaa'), todo('aaaa', 'code a bunch', 'aaaa'),todo('aaaaa', 'code a bunch', 'aaaaa')]));
-projects.push(project('SSS', projectIndex, [todo('s', 'go for a run', 's'), todo('ss', 'lift the weights', 'ss'), todo('sss', 'code a bunch', 'sss'), todo('ssss', 'code a bunch', 'ssss'), todo('sssss', 'code a bunch', 'sssss')]));
-projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', 'd'), todo('dd', 'code a bunch', 'dd'), todo('ddd', 'code a bunch', 'ddd'), todo('dddd', 'code a bunch', 'dddd'),todo('ddddd', 'code a bunch', 'ddddd')]));
-projects.push(project('FFF', projectIndex, [todo('f', 'go for a run', 'f'), todo('ff', 'lift the weights', 'ff'), todo('fff', 'code a bunch', 'fff'), todo('ffff', 'code a bunch', 'ffff'), todo('fffff', 'code a bunch', 'fffff')]));
+projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '2023-10-16', 'low'), todo('code', 'code a bunch', '2023-10-17', 'medium'), todo('nut', 'code a bunch', '2023-10-18', 'high'), todo('livr', 'code a bunch', '2023-10-19', 'low'),todo('tsrm', 'code a bunch', '2023-10-20', 'medium')]));
+projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '2023-11-17', 'high'), todo('lift', 'lift the weights', '2023-10-18', 'low'), todo('kisf', 'code a bunch', '2023-10-19', 'medium'), todo('cvev', 'code a bunch', '2023-10-20', 'high'), todo('eert', 'code a bunch', '2023-10-21', 'low')]));
+projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', '2023-10-18', 'medium'), todo('aa', 'code a bunch', '2023-10-19', 'high'), todo('aaa', 'code a bunch', '2023-11-20', 'low'), todo('aaaa', 'code a bunch', '2023-10-21', 'medium'),todo('aaaaa', 'code a bunch', '2023-10-22', 'high')]));
+projects.push(project('SSS', projectIndex, [todo('s', 'go for a run', '2023-10-19', 'low'), todo('ss', 'lift the weights', '2022-11-20', 'medium'), todo('sss', 'code a bunch', '2023-10-21', 'high'), todo('ssss', 'code a bunch', '2023-10-22', 'low'), todo('sssss', 'code a bunch', '2023-10-23', 'medium')]));
+projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', '2023-10-20', 'high'), todo('dd', 'code a bunch', '2023-10-21', 'low'), todo('ddd', 'code a bunch', '2023-10-22', 'medium'), todo('dddd', 'code a bunch', '2023-11-23', 'high'),todo('ddddd', 'code a bunch', '2023-10-24', 'low')]));
+projects.push(project('FFF', projectIndex, [todo('f', 'go for a run', '2023-10-21', 'medium'), todo('ff', 'lift the weights', '2023-10-22', 'high'), todo('fff', 'code a bunch', '2023-10-23', 'low'), todo('ffff', 'code a bunch', '2023-10-24', 'medium'), todo('fffff', 'code a bunch', '2023-11-25', 'high')]));
+
+
+function sortDates(project) {
+    format(new Date(), 'MM-dd-yyyy')
+
+    project.getTodos().sort(function(a, b) {
+        let firstDate = new Date(a.getDuedate())
+        let secondDate = new Date(b.getDuedate())
+        return compareAsc(firstDate, secondDate)
+    })
+}
+
+function addTodosToInbox() {
+    projects.forEach(getProject)
+    function getProject(project) {
+
+        project.getTodos().forEach(getTodo)
+        function getTodo(todo) {
+            inboxTodos.setTodo(todo)
+        }
+    }
+}
 
 function displayInboxTodos() {
     inboxTodos = inbox([])
     addTodosToInbox()
+    sortDates(inboxTodos)
     displayTodo(inboxTodos)
 }
 
@@ -37,6 +61,7 @@ function displayProjects() {
     function displayProject(value) {
 
         value.setID(projectIndex)
+        sortDates(value)
 
         const projectButton = document.createElement('div')
         projectButton.setAttribute('id', 'project-button')
@@ -61,6 +86,8 @@ function displayProjects() {
         const editImg = document.createElement('img')
         editImg.setAttribute('src', edit)
         editImg.classList.add('project-icon-edit')
+
+
 
         editBtn.appendChild(editImg)
         closeBtn.appendChild(closeImg)
@@ -182,16 +209,6 @@ function displayProjectModal() {
     })
 }
 
-function addTodosToInbox() {
-    projects.forEach(getProject)
-    function getProject(project) {
-
-        project.getTodos().forEach(getTodo)
-        function getTodo(todo) {
-            inboxTodos.setTodo(todo)
-        }
-    }
-}
 
 export {
     displayHeading,

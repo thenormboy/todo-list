@@ -1,4 +1,5 @@
 import {todo} from './object.js'
+import { intlFormat } from 'date-fns'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
 
@@ -22,12 +23,18 @@ function displayTodo(project) {
         todoSection.classList.add(todoIndex)
         todoSection.textContent = value.getName()
 
+        todoSection.classList.remove('todo-button-low')
+        todoSection.classList.remove('todo-button-medium')
+        todoSection.classList.remove('todo-button-high')
+
+        todoSection.classList.add(setTodoPriority(value))
+
         const iconContainer = document.createElement('div')
         iconContainer.classList.add('todo-icon-container')
 
         const todoDuedate = document.createElement('div')
         todoDuedate.setAttribute('id', 'todo-due-date')
-        todoDuedate.textContent = value.getDuedate()
+        todoDuedate.textContent = intlFormat(new Date(value.getDuedate()))
 
         const closeBtn = document.createElement('button')
         closeBtn.setAttribute('id', 'close-todo-btn')
@@ -233,6 +240,19 @@ function displayTodoModal(project) {
             todoModal.close()
         })
     })
+}
+
+function setTodoPriority(todo) {
+
+    let priority = todo.getPriority()
+
+    if (priority == 'low') {
+        return 'todo-button-low'
+    } else if (priority == 'medium') {
+        return 'todo-button-medium'
+    } else {
+        return 'todo-button-high'
+    }
 }
 
 export {
