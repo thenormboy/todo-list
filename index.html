@@ -45,14 +45,18 @@
                     <input id="todo-name" type="text" name="todoName">
                 </p>
                 <p>
-                    <label for="todoDesc">Name: </label>
-                    <input id="todo-desc" type="text" name="todoDesc">
+                    <label for="todoDesc">Description: </label>
+                    <textarea id="todo-desc" type="text" name="todoDesc"></textarea>
                 </p>
                 <p>
-                    <label for="todoDuedate">Name: </label>
-                    <input id="todo-duedate" type="text" name="todoDuedate">
-                    <label for="todoPriority">Name: </label>
-                    <input id="todo-priority" type="text" name="todoPriority">
+                    <label for="todoDuedate">Due Date: </label>
+                    <input id="todo-duedate" type="date" name="todoDuedate">
+                    <label for="todoPriority">Priority: </label>
+                    <select id="todo-priority" name="todoPriority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
                 </p>
                 <div class="todo-dialog-btns">
                 </div>
@@ -67,14 +71,18 @@
                     <input id="edit-todo-name" type="text" name="editTodoName">
                 </p>
                 <p>
-                    <label for="editTodoDesc">Name: </label>
-                    <input id="edit-todo-desc" type="text" name="editTodoDesc">
+                    <label for="editTodoDesc">Description: </label>
+                    <textarea id="edit-todo-desc" type="text" name="editTodoDesc"></textarea>
                 </p>
                 <p>
-                    <label for="editTodoDuedate">Name: </label>
-                    <input id="edit-todo-duedate" type="text" name="editTodoDuedate">
-                    <label for="editTodoPriority">Name: </label>
-                    <input id="edit-todo-priority" type="text" name="editTodoPriority">
+                    <label for="editTodoDuedate">Due Date: </label>
+                    <input id="edit-todo-duedate" type="date" name="editTodoDuedate">
+                    <label for="editTodoPriority">Priority: </label>
+                    <select id="edit-todo-priority" name="editTodoPriority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
                 </p>
                 <div class="edit-todo-dialog-btns">
                 </div>
