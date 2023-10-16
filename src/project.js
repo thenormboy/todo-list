@@ -7,8 +7,8 @@ import edit from './icons/edit.svg'
 let projects = [];
 let projectIndex = 0;
 let currentID = 0;
-projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '2023-10-13', 'low'), todo('code', 'code a bunch', '2023-10-17', 'medium'), todo('nut', 'code a bunch', '2023-10-14', 'high'), todo('livr', 'code a bunch', '2023-10-15', 'low'),todo('tsrm', 'code a bunch', '2023-10-20', 'medium')]));
-projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '2023-11-17', 'high'), todo('lift', 'lift the weights', '2023-10-18', 'low'), todo('kisf', 'code a bunch', '2023-10-19', 'medium'), todo('cvev', 'code a bunch', '2023-10-20', 'high'), todo('eert', 'code a bunch', '2023-10-21', 'low')]));
+//projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '2023-10-13', 'low'), todo('code', 'code a bunch', '2023-10-17', 'medium'), todo('nut', 'code a bunch', '2023-10-14', 'high'), todo('livr', 'code a bunch', '2023-10-15', 'low'),todo('tsrm', 'code a bunch', '2023-10-20', 'medium')]));
+//projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '2023-11-17', 'high'), todo('lift', 'lift the weights', '2023-10-18', 'low'), todo('kisf', 'code a bunch', '2023-10-19', 'medium'), todo('cvev', 'code a bunch', '2023-10-20', 'high'), todo('eert', 'code a bunch', '2023-10-21', 'low')]));
 //projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', '2023-10-18', 'medium'), todo('aa', 'code a bunch', '2023-10-19', 'high'), todo('aaa', 'code a bunch', '2023-11-20', 'low'), todo('aaaa', 'code a bunch', '2023-10-21', 'medium'),todo('aaaaa', 'code a bunch', '2023-10-15', 'high')]));
 //projects.push(project('SSS', projectIndex, [todo('s', 'go for a run', '2023-10-19', 'low'), todo('ss', 'lift the weights', '2022-11-20', 'medium'), todo('sss', 'code a bunch', '2023-10-21', 'high'), todo('ssss', 'code a bunch', '2023-10-14', 'low'), todo('sssss', 'code a bunch', '2023-10-23', 'medium')]));
 //projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', '2023-10-20', 'high'), todo('dd', 'code a bunch', '2023-10-21', 'low'), todo('ddd', 'code a bunch', '2023-10-22', 'medium'), todo('dddd', 'code a bunch', '2023-11-23', 'high'),todo('ddddd', 'code a bunch', '2023-10-24', 'low')]));
@@ -52,12 +52,39 @@ function storeData() {
     localStorage.setItem('projectList', proj)
 }
 
+function getData() {
+
+    let currentProject
+    let currentTodo
+
+    let proj_deserial = JSON.parse(localStorage.getItem('projectList'))
+    console.log(proj_deserial)
+
+    proj_deserial.forEach(createProject)
+
+    function createProject(newProject) {
+
+        currentProject = project(newProject.name, newProject.ID, [])
+        
+        newProject.todos.forEach(createTodos)
+
+        function createTodos(value) {
+            currentTodo = todo(value.name, value.description, value.duedate, value.priority, value.ID)
+            currentProject.setTodo(currentTodo)
+        }
+
+        projects.push(currentProject)
+    }
+}
+
 function displayHeading(title) {
     const element = document.querySelector('.main-heading')
     element.textContent = title
 }
 
 function displayProjects() {
+
+    getData()
 
     projectIndex = 0;
 
@@ -111,8 +138,6 @@ function displayProjects() {
     loadProjectCloseBtns()
     loadProjectEditBtns();
 
-    storeData()
-    console.log(localStorage)
 }
 
 function loadProjectInfo() {
@@ -139,6 +164,8 @@ function loadProjectCloseBtns() {
             displayProjects()
             displayHeading('Inbox')
             displayInboxTodos()
+            storeData()
+            console.log(localStorage)
         })
     }
     
@@ -168,6 +195,8 @@ function loadProjectEditBtns() {
         editProjectModal.close();
         displayProjects()
         displayHeading(selectProjectByID(currentID).getName())
+        storeData()
+        console.log(localStorage)
     })
 
     cancelBtn.addEventListener('click', (event) => {
