@@ -1,4 +1,5 @@
 import { todo } from './object.js'
+import { storeData } from './project.js'
 import { intlFormat } from 'date-fns'
 import close from './icons/close.svg'
 import edit from './icons/edit.svg'
@@ -82,6 +83,7 @@ function loadTodoCloseBtns(project) {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
             todoArray.splice(todoArray.indexOf(selectTodoByID(buttons[i].classList[0], project)), 1)
+            storeData()
             displayTodo(project)
         })
     }
@@ -147,6 +149,7 @@ function loadTodoEditBtns(project) {
                 editTodoDuedate.value = ''
                 editTodoPriority.value = ''
                 editTodoModal.close()
+                storeData()
                 displayTodo(project)
             })
         })
@@ -230,6 +233,7 @@ function displayTodoModal(project) {
             todoDuedate.value = ''
             todoPriority.value = ''
             todoModal.close()
+            storeData()
             displayTodo(project)
         })
 

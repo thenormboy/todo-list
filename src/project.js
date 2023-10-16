@@ -54,11 +54,12 @@ function storeData() {
 
 function getData() {
 
+    projects = []
+
     let currentProject
     let currentTodo
 
     let proj_deserial = JSON.parse(localStorage.getItem('projectList'))
-    console.log(proj_deserial)
 
     proj_deserial.forEach(createProject)
 
@@ -83,8 +84,6 @@ function displayHeading(title) {
 }
 
 function displayProjects() {
-
-    getData()
 
     projectIndex = 0;
 
@@ -161,11 +160,10 @@ function loadProjectCloseBtns() {
         buttons[i].addEventListener('click', (event) => {
             event.stopPropagation()
             projects.splice(projects.indexOf(selectProjectByID(buttons[i].classList[0])), 1)
+            storeData()
             displayProjects()
             displayHeading('Inbox')
             displayInboxTodos()
-            storeData()
-            console.log(localStorage)
         })
     }
     
@@ -196,7 +194,6 @@ function loadProjectEditBtns() {
         displayProjects()
         displayHeading(selectProjectByID(currentID).getName())
         storeData()
-        console.log(localStorage)
     })
 
     cancelBtn.addEventListener('click', (event) => {
@@ -239,6 +236,7 @@ function displayProjectModal() {
         projects.push(project(projectName.value, projectIndex, []))
         projectName.value = ''
         projectModal.close()
+        storeData()
         displayProjects()
     })
 
@@ -254,5 +252,7 @@ export {
     displayHeading,
     displayProjects,
     displayProjectModal,
+    getData,
+    storeData,
     projects
 }

@@ -1,7 +1,7 @@
 import { format, compareAsc, isWithinInterval, addWeeks, sub } from 'date-fns'
 import { inbox } from './object.js'
 import { displayTodo } from './todo.js'
-import { projects } from './project.js'
+import { projects, getData } from './project.js'
 
 let inboxTodos = inbox([])
 let weekInboxTodos = inbox([])
@@ -69,6 +69,7 @@ function addTodosToInbox() {
 }
 
 function displayInboxTodos() {
+    getData()
     inboxTodos = inbox([])
     addTodosToInbox()
     sortDates(inboxTodos)

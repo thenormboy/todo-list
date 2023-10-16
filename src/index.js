@@ -1,5 +1,5 @@
 import './style.css'
-import {displayHeading, displayProjects, displayProjectModal } from './project'
+import {displayHeading, displayProjects, displayProjectModal, getData } from './project'
 import { displayInboxTodos, displayTodayInboxTodos, displayWeekInboxTodos} from './inbox.js'
 
 function loadMainPage() {
