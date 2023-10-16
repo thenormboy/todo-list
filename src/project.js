@@ -7,12 +7,6 @@ import edit from './icons/edit.svg'
 let projects = [];
 let projectIndex = 0;
 let currentID = 0;
-//projects.push(project('Work', projectIndex, [todo('write', 'write a stuff', '2023-10-13', 'low'), todo('code', 'code a bunch', '2023-10-17', 'medium'), todo('nut', 'code a bunch', '2023-10-14', 'high'), todo('livr', 'code a bunch', '2023-10-15', 'low'),todo('tsrm', 'code a bunch', '2023-10-20', 'medium')]));
-//projects.push(project('Gym', projectIndex, [todo('Run', 'go for a run', '2023-11-17', 'high'), todo('lift', 'lift the weights', '2023-10-18', 'low'), todo('kisf', 'code a bunch', '2023-10-19', 'medium'), todo('cvev', 'code a bunch', '2023-10-20', 'high'), todo('eert', 'code a bunch', '2023-10-21', 'low')]));
-//projects.push(project('AAA', projectIndex, [todo('a', 'write a stuff', '2023-10-18', 'medium'), todo('aa', 'code a bunch', '2023-10-19', 'high'), todo('aaa', 'code a bunch', '2023-11-20', 'low'), todo('aaaa', 'code a bunch', '2023-10-21', 'medium'),todo('aaaaa', 'code a bunch', '2023-10-15', 'high')]));
-//projects.push(project('SSS', projectIndex, [todo('s', 'go for a run', '2023-10-19', 'low'), todo('ss', 'lift the weights', '2022-11-20', 'medium'), todo('sss', 'code a bunch', '2023-10-21', 'high'), todo('ssss', 'code a bunch', '2023-10-14', 'low'), todo('sssss', 'code a bunch', '2023-10-23', 'medium')]));
-//projects.push(project('DDD', projectIndex, [todo('d', 'write a stuff', '2023-10-20', 'high'), todo('dd', 'code a bunch', '2023-10-21', 'low'), todo('ddd', 'code a bunch', '2023-10-22', 'medium'), todo('dddd', 'code a bunch', '2023-11-23', 'high'),todo('ddddd', 'code a bunch', '2023-10-24', 'low')]));
-//projects.push(project('FFF', projectIndex, [todo('f', 'go for a run', '2023-10-21', 'medium'), todo('ff', 'lift the weights', '2023-10-22', 'high'), todo('fff', 'code a bunch', '2023-10-23', 'low'), todo('ffff', 'code a bunch', '2023-10-24', 'medium'), todo('fffff', 'code a bunch', '2023-11-25', 'high')]));
 
 function storeData() {
 
@@ -58,8 +52,54 @@ function getData() {
 
     let currentProject
     let currentTodo
+    let proj_deserial
 
-    let proj_deserial = JSON.parse(localStorage.getItem('projectList'))
+    if (localStorage.getItem('projectList') === null) {
+        proj_deserial = [
+            {
+                "name": "Work",
+                "ID": 0,
+                "todos": [
+                    {
+                        "name": "Code",
+                        "description": "code a bunch",
+                        "duedate": "2023-10-17",
+                        "priority": "low",
+                        "ID": 0
+                    },
+                    {
+                        "name": "Write",
+                        "description": "write a bunch",
+                        "duedate": "2023-10-14",
+                        "priority": "medium",
+                        "ID": 1
+                    }
+                ]
+            },
+            {
+                "name": "Gym",
+                "ID": 1,
+                "todos": [
+                    {
+                        "name": "Lift",
+                        "description": "lift the weights",
+                        "duedate": "2023-10-20",
+                        "priority": "low",
+                        "ID": 0
+                    },
+                    {
+                        "name": "Run",
+                        "description": "go for a run",
+                        "duedate": "2023-11-17",
+                        "priority": "high",
+                        "ID": 2
+                    }
+                ]
+            }
+        ]
+    } else {
+        proj_deserial = JSON.parse(localStorage.getItem('projectList'))
+    }
 
     proj_deserial.forEach(createProject)
 
