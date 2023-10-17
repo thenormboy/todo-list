@@ -1,126 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script src="main.js" defer></script>
 
     <div class="dialogs">
-        <dialog id="project-modal">
-            <h3>New Project</h3>
-            <form>
-                <p>
-                    <label for="projectName">Name: </label>
-                    <input id="projectName" type="text" name="projectName">
-                </p>
-                <div>
-                    <button id="cancelProjectBtn">Cancel</button>
-                    <button id="confirmProjectBtn" value="default">Confirm</button>
-                </div>
-            </form>
-        </dialog>
+      <dialog id="project-modal">
+        <h3>New Project</h3>
+        <form>
+          <p>
+            <label for="projectName">Name: </label>
+            <input id="projectName" type="text" name="projectName" />
+          </p>
+          <div>
+            <button id="cancelProjectBtn">Cancel</button>
+            <button id="confirmProjectBtn" value="default">Confirm</button>
+          </div>
+        </form>
+      </dialog>
 
-        <dialog id="edit-project-modal">
-            <h3>Edit Project</h3>
-            <form>
-                <p>
-                    <label for="editProjectName">New Name: </label>
-                    <input id="edit-project-name" type="text" name="editProjectName">
-                </p>
-                <div>
-                    <button id="cancel-edit-project-btn">Cancel</button>
-                    <button id="confirm-edit-project-btn">Confirm</button>
-                </div>
-            </form>
-        </dialog>
+      <dialog id="edit-project-modal">
+        <h3>Edit Project</h3>
+        <form>
+          <p>
+            <label for="editProjectName">New Name: </label>
+            <input id="edit-project-name" type="text" name="editProjectName" />
+          </p>
+          <div>
+            <button id="cancel-edit-project-btn">Cancel</button>
+            <button id="confirm-edit-project-btn">Confirm</button>
+          </div>
+        </form>
+      </dialog>
 
-        <dialog id="todo-modal">
-            <h3>New Todo</h3>
-            <form>
-                <p>
-                    <label for="todoName">Name: </label>
-                    <input id="todo-name" type="text" name="todoName">
-                </p>
-                <p>
-                    <label for="todoDesc">Description: </label>
-                    <textarea id="todo-desc" type="text" name="todoDesc"></textarea>
-                </p>
-                <p>
-                    <label for="todoDuedate">Due Date: </label>
-                    <input id="todo-duedate" type="date" name="todoDuedate">
-                    <label for="todoPriority">Priority: </label>
-                    <select id="todo-priority" name="todoPriority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                </p>
-                <div class="todo-dialog-btns">
-                </div>
-            </form>
-        </dialog>
+      <dialog id="todo-modal">
+        <h3>New Todo</h3>
+        <form>
+          <p>
+            <label for="todoName">Name: </label>
+            <input id="todo-name" type="text" name="todoName" />
+          </p>
+          <p>
+            <label for="todoDesc">Description: </label>
+            <textarea id="todo-desc" type="text" name="todoDesc"></textarea>
+          </p>
+          <p>
+            <label for="todoDuedate">Due Date: </label>
+            <input id="todo-duedate" type="date" name="todoDuedate" />
+            <label for="todoPriority">Priority: </label>
+            <select id="todo-priority" name="todoPriority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </p>
+          <div class="todo-dialog-btns"></div>
+        </form>
+      </dialog>
 
-        <dialog id="edit-todo-modal">
-            <h3>New Todo</h3>
-            <form>
-                <p>
-                    <label for="editTodoName">Name: </label>
-                    <input id="edit-todo-name" type="text" name="editTodoName">
-                </p>
-                <p>
-                    <label for="editTodoDesc">Description: </label>
-                    <textarea id="edit-todo-desc" type="text" name="editTodoDesc"></textarea>
-                </p>
-                <p>
-                    <label for="editTodoDuedate">Due Date: </label>
-                    <input id="edit-todo-duedate" type="date" name="editTodoDuedate">
-                    <label for="editTodoPriority">Priority: </label>
-                    <select id="edit-todo-priority" name="editTodoPriority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                </p>
-                <div class="edit-todo-dialog-btns">
-                </div>
-            </form>
-        </dialog>
+      <dialog id="edit-todo-modal">
+        <h3>New Todo</h3>
+        <form>
+          <p>
+            <label for="editTodoName">Name: </label>
+            <input id="edit-todo-name" type="text" name="editTodoName" />
+          </p>
+          <p>
+            <label for="editTodoDesc">Description: </label>
+            <textarea
+              id="edit-todo-desc"
+              type="text"
+              name="editTodoDesc"
+            ></textarea>
+          </p>
+          <p>
+            <label for="editTodoDuedate">Due Date: </label>
+            <input id="edit-todo-duedate" type="date" name="editTodoDuedate" />
+            <label for="editTodoPriority">Priority: </label>
+            <select id="edit-todo-priority" name="editTodoPriority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </p>
+          <div class="edit-todo-dialog-btns"></div>
+        </form>
+      </dialog>
     </div>
 
     <div id="content">
-        <div class="header">
-            <div>
-                <p class="logo-header">ToDo</p>
-            </div>
-            <div></div>
-            <div></div>
-            <div></div>
+      <div class="header">
+        <div>
+          <p class="logo-header">ToDo</p>
         </div>
-        <div class="sidebar">
-            <div class="side-display">
-                <button id="inbox-button">Inbox</button>
-                <button id="today-button">Today</button>
-                <button id="week-button">This Week</button>
-            </div>
-            <div class="project-display">
-                <p class="sidebar-heading">Projects</p>
-                <div class="project-container"></div>
-                <button class="project-button" id="add-project">New Project</button>
-            </div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="sidebar">
+        <div class="side-display">
+          <button id="inbox-button">Inbox</button>
+          <button id="today-button">Today</button>
+          <button id="week-button">This Week</button>
         </div>
-        <div class="main">
-            <div class="main-heading">Inbox</div>
-            <div class="todo-heading">
-                <div>Tasks</div>
-                <div>Due Date</div>
-            </div>
-            <div class="todo-container"></div>
-            <div class="btn-container">
-            </div>
+        <div class="project-display">
+          <p class="sidebar-heading">Projects</p>
+          <div class="project-container"></div>
+          <button class="project-button" id="add-project">New Project</button>
         </div>
+      </div>
+      <div class="main">
+        <div class="main-heading">Inbox</div>
+        <div class="todo-heading">
+          <div>Tasks</div>
+          <div>Due Date</div>
+        </div>
+        <div class="todo-container"></div>
+        <div class="btn-container"></div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

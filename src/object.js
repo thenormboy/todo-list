@@ -1,89 +1,84 @@
 const project = (name, ID, todos) => {
-    const getName = () => name;
-    const getID = () => ID
-    const getTodos = () => todos
+  const getName = () => name;
+  const getID = () => ID;
+  const getTodos = () => todos;
 
-    const setName = newName => {
-        name = newName;
-    }
+  const setName = (newName) => {
+    name = newName;
+  };
 
-    const setID = newID => {
-        ID = newID;
-    }
+  const setID = (newID) => {
+    ID = newID;
+  };
 
-    const setTodo = newTodo => {
-        todos.push(newTodo)
-    }
-    
-    return { 
-        getName, 
-        getID, 
-        getTodos, 
-        setName, 
-        setID, 
-        setTodo 
-    }
-}
+  const setTodo = (newTodo) => {
+    todos.push(newTodo);
+  };
+
+  return {
+    getName,
+    getID,
+    getTodos,
+    setName,
+    setID,
+    setTodo,
+  };
+};
 
 const inbox = (todos) => {
-    const getTodos = () => todos
-    const getName = () => 'Inbox'
+  const getTodos = () => todos;
+  const getName = () => "Inbox";
 
-    const setTodo = todo => {
-        todos.push(todo)
-    }
+  const setTodo = (todo) => {
+    todos.push(todo);
+  };
 
-    return {
-        getTodos,
-        getName,
-        setTodo
-    }
-}
+  return {
+    getTodos,
+    getName,
+    setTodo,
+  };
+};
 
 const todo = (name, description, duedate, priority, ID) => {
-    const getName = () => name;
-    const getDescription = () => description;
-    const getDuedate = () => duedate;
-    const getPriority = () => priority;
-    const getID = () => ID
+  const getName = () => name;
+  const getDescription = () => description;
+  const getDuedate = () => duedate;
+  const getPriority = () => priority;
+  const getID = () => ID;
 
-    const setName = newName => {
-        name = newName
-    }
+  const setName = (newName) => {
+    name = newName;
+  };
 
-    const setDescription = newDescription => {
-        description = newDescription
-    }
+  const setDescription = (newDescription) => {
+    description = newDescription;
+  };
 
-    const setDuedate = newDuedate => {
-        duedate = newDuedate
-    }
+  const setDuedate = (newDuedate) => {
+    duedate = newDuedate;
+  };
 
-    const setPriority = newPriority => {
-        priority = newPriority
-    }
+  const setPriority = (newPriority) => {
+    priority = newPriority;
+  };
 
-    const setID = newID => {
-        ID = newID
-    }
+  const setID = (newID) => {
+    ID = newID;
+  };
 
-    return { 
-        getName, 
-        getDescription, 
-        getDuedate, 
-        getPriority, 
-        getID,
-        setName,
-        setDescription,
-        setDuedate,
-        setPriority,
-        setID 
-    }
+  return {
+    getName,
+    getDescription,
+    getDuedate,
+    getPriority,
+    getID,
+    setName,
+    setDescription,
+    setDuedate,
+    setPriority,
+    setID,
+  };
+};
 
-}
-
-export {
-    project,
-    inbox,
-    todo
-}
+export { project, inbox, todo };
